@@ -1,0 +1,195 @@
+/* ── Tech Stack Section ── */
+.tech-section {
+  padding: var(--section-gap) 0;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.tech-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .tech-categories {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Per-category accent tints (light) ── */
+.tech-category[data-cat='languages'] {
+  --cat: #7c3aed;
+  --cat-rgb: 124, 58, 237;
+}
+.tech-category[data-cat='frontend'] {
+  --cat: #2563eb;
+  --cat-rgb: 37, 99, 235;
+}
+.tech-category[data-cat='backend'] {
+  --cat: #16a34a;
+  --cat-rgb: 22, 163, 74;
+}
+.tech-category[data-cat='databases'] {
+  --cat: #0891b2;
+  --cat-rgb: 8, 145, 178;
+}
+.tech-category[data-cat='devops'] {
+  --cat: #d97706;
+  --cat-rgb: 217, 119, 6;
+}
+.tech-category[data-cat='integrations'] {
+  --cat: #db2777;
+  --cat-rgb: 219, 39, 119;
+}
+
+/* ── Per-category accent tints (dark) ── */
+:root[data-theme='dark'] .tech-category[data-cat='languages'] {
+  --cat: #a78bfa;
+  --cat-rgb: 167, 139, 250;
+}
+:root[data-theme='dark'] .tech-category[data-cat='frontend'] {
+  --cat: #5b8def;
+  --cat-rgb: 91, 141, 239;
+}
+:root[data-theme='dark'] .tech-category[data-cat='backend'] {
+  --cat: #34d399;
+  --cat-rgb: 52, 211, 153;
+}
+:root[data-theme='dark'] .tech-category[data-cat='databases'] {
+  --cat: #22d3ee;
+  --cat-rgb: 34, 211, 238;
+}
+:root[data-theme='dark'] .tech-category[data-cat='devops'] {
+  --cat: #fbbf24;
+  --cat-rgb: 251, 191, 36;
+}
+:root[data-theme='dark'] .tech-category[data-cat='integrations'] {
+  --cat: #f472b6;
+  --cat-rgb: 244, 114, 182;
+}
+
+/* ── Category panel ── */
+.tech-category {
+  background: rgba(var(--cat-rgb), 0.035);
+  border: 1px solid rgba(var(--cat-rgb), 0.14);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.tech-category:hover {
+  border-color: rgba(var(--cat-rgb), 0.32);
+  box-shadow: 0 10px 30px rgba(var(--cat-rgb), 0.07);
+}
+
+.tech-category-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.tech-category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(var(--cat-rgb), 0.12);
+  color: var(--cat);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.tech-category:hover .tech-category-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Skill pills ── */
+.tech-pill {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: rgba(var(--cat-rgb), 0.06);
+  border: 1px solid rgba(var(--cat-rgb), 0.22);
+  color: var(--color-text-secondary);
+  cursor: default;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    box-shadow 0.25s,
+    color 0.25s;
+}
+
+.tech-pill:hover {
+  border-color: var(--cat);
+  color: var(--cat);
+  background: rgba(var(--cat-rgb), 0.14);
+  box-shadow: 0 4px 18px rgba(var(--cat-rgb), 0.18);
+}
+
+/* Cursor-following spotlight */
+.tech-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    100px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(var(--cat-rgb), 0.18),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tech-pill:hover::after {
+  opacity: 1;
+}
+
+/* Hover dot */
+.tech-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cat);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.25s, transform 0.25s;
+  flex-shrink: 0;
+}
+
+.tech-pill:hover .tech-pill-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-pill,
+  .tech-pill::after,
+  .tech-pill-dot,
+  .tech-category,
+  .tech-category-icon {
+    transition: none;
+  }
+}

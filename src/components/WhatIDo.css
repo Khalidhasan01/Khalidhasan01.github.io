@@ -1,0 +1,92 @@
+/* ── What I Do ── */
+.whatido-section {
+  padding: var(--section-gap) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.whatido-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.whatido-header .section-label {
+  margin-bottom: 0;
+}
+
+.whatido-link {
+  font-size: 0.72rem;
+  color: var(--color-accent-link);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.whatido-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.whatido-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  will-change: transform;
+}
+
+.whatido-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 12px 40px var(--color-accent-glow);
+}
+
+.whatido-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-link);
+  transition: all 0.3s;
+}
+
+.whatido-card:hover .whatido-icon {
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  transform: rotate(-8deg) scale(1.1);
+  box-shadow: 0 4px 16px var(--color-accent-glow-strong);
+}
+
+.whatido-card:hover .whatido-title {
+  color: var(--color-accent);
+}
+
+.whatido-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: color 0.3s;
+}
+
+.whatido-desc {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .whatido-grid {
+    grid-template-columns: 1fr;
+  }
+}
