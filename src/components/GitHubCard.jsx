@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { GithubIcon } from './BrandIcons';
@@ -23,21 +22,24 @@ const GRAPH_LEVELS = [
   'var(--graph-level-4)',
 ];
 
+// Generate a stable grid once — content doesn't change between renders.
+function makeCells() {
+  const arr = [];
+  for (let i = 0; i < 182; i++) {
+    const r = Math.random();
+    let level = '';
+    if (r > 0.82) level = 'l4';
+    else if (r > 0.65) level = 'l3';
+    else if (r > 0.45) level = 'l2';
+    else if (r > 0.3) level = 'l1';
+    arr.push(level);
+  }
+  return arr;
+}
+
+const cells = makeCells();
+
 export default function GitHubCard() {
-  // Generate a stable grid
-  const cells = useMemo(() => {
-    const arr = [];
-    for (let i = 0; i < 182; i++) {
-      const r = Math.random();
-      let level = '';
-      if (r > 0.82) level = 'l4';
-      else if (r > 0.65) level = 'l3';
-      else if (r > 0.45) level = 'l2';
-      else if (r > 0.3) level = 'l1';
-      arr.push(level);
-    }
-    return arr;
-  }, []);
 
   return (
     <div className="gh-card">
@@ -45,11 +47,11 @@ export default function GitHubCard() {
       <div className="gh-header">
         <div className="gh-user">
           <GithubIcon size={16} />
-          <span>@KhalidHasan</span>
+          <span>@Khalidhasan01</span>
           <span className="since">· since 2022</span>
         </div>
         <a
-          href="https://github.com/khalidhasan"
+          href="https://github.com/Khalidhasan01"
           target="_blank"
           rel="noreferrer"
           className="gh-follow"

@@ -73,6 +73,9 @@ export default function WhatIDo() {
               <div className="whatido-icon">{s.icon}</div>
               <div className="whatido-title">{s.title}</div>
               <div className="whatido-desc">{s.desc}</div>
+              <a href="#projects" className="whatido-cta">
+                view projects <ArrowRight size={11} />
+              </a>
             </motion.div>
           ))}
         </motion.div>

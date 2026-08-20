@@ -32,18 +32,22 @@
   color: var(--color-text);
 }
 
+.navbar-logo:hover {
+  color: var(--color-text);
+}
+
 .navbar-logo .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-green);
-  box-shadow: 0 0 8px var(--color-green);
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--color-green); }
-  50% { opacity: 0.6; box-shadow: 0 0 16px var(--color-green); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--color-accent); }
+  50% { opacity: 0.6; box-shadow: 0 0 16px var(--color-accent); }
 }
 
 .navbar-logo .domain {
@@ -75,13 +79,20 @@
   padding: 0;
   border-radius: 50%;
   border: 1px solid transparent;
-  transition: color 0.2s, background 0.2s, border-color 0.2s;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .theme-toggle-btn:hover {
   color: var(--color-accent);
   background: rgba(var(--color-accent-rgb), 0.12);
   border-color: rgba(var(--color-accent-rgb), 0.25);
+  transform: scale(1.12);
+  box-shadow: 0 4px 16px var(--color-accent-glow);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .navbar-links a {
@@ -110,6 +121,15 @@
 }
 
 .navbar-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar-links a.active {
+  color: var(--color-text);
+}
+
+.navbar-links a.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }

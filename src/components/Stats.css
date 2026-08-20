@@ -15,11 +15,26 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 28px 24px;
+  padding: 32px 24px 28px;
   transition: border-color 0.3s, box-shadow 0.3s;
   position: relative;
   overflow: hidden;
   will-change: transform;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-link), transparent);
+  opacity: 0.35;
+  transition: opacity 0.3s;
 }
 
 .stat-card:hover {
@@ -27,12 +42,16 @@
   box-shadow: 0 10px 32px var(--color-accent-glow);
 }
 
+.stat-card:hover::before {
+  opacity: 1;
+}
+
 .stat-number {
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   font-weight: 800;
-  color: var(--color-accent-link);
-  line-height: 1;
-  margin-bottom: 8px;
+  color: var(--color-stat-value);
+  line-height: 1.05;
+  margin-bottom: 6px;
   transition: color 0.3s;
   display: block;
 }

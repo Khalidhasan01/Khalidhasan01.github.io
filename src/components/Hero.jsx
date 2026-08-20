@@ -98,7 +98,7 @@ export default function Hero() {
 
             <div className="hero-socials">
               <a
-                href="https://github.com/khalidhasan"
+                href="https://github.com/Khalidhasan01"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -111,7 +111,7 @@ export default function Hero() {
               >
                 <LinkedinIcon size={14} /> linkedin
               </a>
-              <a href="mailto:khalid@example.com">
+              <a href="mailto:khalidhasan842@gmail.com">
                 <Mail size={14} /> email
               </a>
             </div>

@@ -71,7 +71,7 @@
 .gh-stat-value {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-accent-link);
+  color: var(--color-stat-value);
   display: block;
 }
 
@@ -102,15 +102,21 @@
 .gh-contrib-legend {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 0.6rem;
-  color: var(--color-text-muted);
+  font-weight: 500;
+  color: var(--color-text-secondary);
 }
 
 .gh-legend-cell {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme='dark'] .gh-legend-cell {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .gh-grid {

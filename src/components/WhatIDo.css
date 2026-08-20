@@ -85,6 +85,25 @@
   line-height: 1.7;
 }
 
+.whatido-cta {
+  margin-top: auto;
+  padding-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-link);
+  transition: color 0.2s, gap 0.2s;
+}
+
+.whatido-cta:hover {
+  color: var(--color-accent);
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
   .whatido-grid {
     grid-template-columns: 1fr;

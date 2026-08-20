@@ -2,7 +2,7 @@
 .tech-section {
   padding: var(--section-gap) 0;
   border-top: 1px solid var(--color-border);
-  background: var(--color-bg-alt);
+  background: var(--color-bg-tint);
 }
 
 .tech-categories {
@@ -18,56 +18,56 @@
   }
 }
 
-/* ── Per-category accent tints (light) ── */
+/* ── Per-category accent tints (light) — tonal shades of the 3-accent family ── */
 .tech-category[data-cat='languages'] {
-  --cat: #7c3aed;
-  --cat-rgb: 124, 58, 237;
+  --cat: #64748b;
+  --cat-rgb: 100, 116, 139;
 }
 .tech-category[data-cat='frontend'] {
   --cat: #2563eb;
   --cat-rgb: 37, 99, 235;
 }
+.tech-category[data-cat='databases'] {
+  --cat: #1d4ed8;
+  --cat-rgb: 29, 78, 216;
+}
 .tech-category[data-cat='backend'] {
   --cat: #16a34a;
   --cat-rgb: 22, 163, 74;
 }
-.tech-category[data-cat='databases'] {
-  --cat: #0891b2;
-  --cat-rgb: 8, 145, 178;
+.tech-category[data-cat='integrations'] {
+  --cat: #15803d;
+  --cat-rgb: 21, 128, 61;
 }
 .tech-category[data-cat='devops'] {
   --cat: #d97706;
   --cat-rgb: 217, 119, 6;
 }
-.tech-category[data-cat='integrations'] {
-  --cat: #db2777;
-  --cat-rgb: 219, 39, 119;
-}
 
 /* ── Per-category accent tints (dark) ── */
 :root[data-theme='dark'] .tech-category[data-cat='languages'] {
-  --cat: #a78bfa;
-  --cat-rgb: 167, 139, 250;
+  --cat: #94a3b8;
+  --cat-rgb: 148, 163, 184;
 }
 :root[data-theme='dark'] .tech-category[data-cat='frontend'] {
   --cat: #5b8def;
   --cat-rgb: 91, 141, 239;
 }
+:root[data-theme='dark'] .tech-category[data-cat='databases'] {
+  --cat: #8ab2f5;
+  --cat-rgb: 138, 178, 245;
+}
 :root[data-theme='dark'] .tech-category[data-cat='backend'] {
   --cat: #34d399;
   --cat-rgb: 52, 211, 153;
 }
-:root[data-theme='dark'] .tech-category[data-cat='databases'] {
-  --cat: #22d3ee;
-  --cat-rgb: 34, 211, 238;
+:root[data-theme='dark'] .tech-category[data-cat='integrations'] {
+  --cat: #6ee7a0;
+  --cat-rgb: 110, 231, 160;
 }
 :root[data-theme='dark'] .tech-category[data-cat='devops'] {
   --cat: #fbbf24;
   --cat-rgb: 251, 191, 36;
-}
-:root[data-theme='dark'] .tech-category[data-cat='integrations'] {
-  --cat: #f472b6;
-  --cat-rgb: 244, 114, 182;
 }
 
 /* ── Category panel ── */
@@ -137,7 +137,8 @@
     border-color 0.25s,
     background 0.25s,
     box-shadow 0.25s,
-    color 0.25s;
+    color 0.25s,
+    transform 0.25s;
 }
 
 .tech-pill:hover {

@@ -21,7 +21,7 @@ export default function Footer() {
 
           <div className="footer-links">
             <a
-              href="https://github.com/khalidhasan"
+              href="https://github.com/Khalidhasan01"
               target="_blank"
               rel="noreferrer"
               className="footer-link"
@@ -36,7 +36,7 @@ export default function Footer() {
             >
               <LinkedinIcon size={15} /> LinkedIn
             </a>
-            <a href="mailto:khalid@example.com" className="footer-link">
+            <a href="mailto:khalidhasan842@gmail.com" className="footer-link">
               <Mail size={15} /> Email
             </a>
           </div>

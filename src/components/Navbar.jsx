@@ -1,10 +1,22 @@
 import { useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { pageUrl, hashUrl } from '../lib/paths';
 import './Navbar.css';
 
-export default function Navbar({ theme, onToggleTheme }) {
+export default function Navbar({ theme, onToggleTheme, page, onNavigate }) {
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { label: 'projects', href: hashUrl('projects') },
+    { label: 'about', href: pageUrl('about') },
+    { label: 'contact', href: pageUrl('contact') },
+  ];
+
+  const navigate = (destination, event) => {
+    setOpen(false);
+    onNavigate?.(destination, event);
+  };
 
   return (
     <motion.nav
@@ -14,20 +26,32 @@ export default function Navbar({ theme, onToggleTheme }) {
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div className="navbar-inner">
-        <div className="navbar-logo">
+        <a
+          className="navbar-logo"
+          href={pageUrl('home')}
+          onClick={(event) => navigate('home', event)}
+          aria-label="Khalid Hasan home"
+        >
           <span className="dot" />
           <span>khalid</span>
           <span className="domain">.dev</span>
-        </div>
+        </a>
 
         <ul className={`navbar-links ${open ? 'open' : ''}`}>
-          {['projects', 'about', 'contact'].map((link) => (
-            <li key={link}>
+          {links.map(({ label, href }) => (
+            <li key={label}>
               <a
-                href={`#${link}`}
-                onClick={() => setOpen(false)}
+                href={href}
+                className={
+                  page === 'about' && label === 'about'
+                    ? 'active'
+                    : page === 'contact' && label === 'contact'
+                      ? 'active'
+                      : undefined
+                }
+                onClick={(event) => navigate(label, event)}
               >
-                {link}
+                {label}
               </a>
             </li>
           ))}

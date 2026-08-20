@@ -1,0 +1,317 @@
+.contact-page {
+  padding-top: 56px;
+}
+
+.contact-hero {
+  padding: 72px 0 96px;
+}
+
+.contact-intro {
+  max-width: 760px;
+}
+
+.contact-intro .section-label {
+  margin-bottom: 22px;
+}
+
+.contact-intro h1 {
+  color: var(--color-text);
+  font-size: clamp(1.7rem, 3.6vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.contact-intro h1 .accent {
+  color: var(--color-accent);
+}
+
+.contact-lede {
+  max-width: 610px;
+  margin-top: 22px;
+  color: var(--color-text-secondary);
+  font-size: clamp(0.9rem, 1.6vw, 1.04rem);
+  line-height: 1.85;
+}
+
+/* ── Business card ── */
+.contact-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 64px 0 0;
+}
+
+.contact-stage {
+  perspective: 1200px;
+}
+
+.contact-tilt {
+  transform-style: preserve-3d;
+  border-radius: var(--radius);
+}
+
+.contact-card {
+  position: relative;
+  display: block;
+  width: min(380px, 86vw);
+  aspect-ratio: 5 / 3;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.contact-card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.contact-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.contact-front {
+  background: linear-gradient(
+    135deg,
+    var(--color-surface),
+    color-mix(in srgb, var(--color-surface) 72%, transparent)
+  );
+  border: 1px solid var(--color-border);
+  box-shadow: 0 18px 44px var(--color-accent-glow);
+}
+
+.contact-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at 88% 10%,
+    rgba(var(--color-accent-rgb), 0.1),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.contact-front-top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.contact-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.contact-brand .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+}
+
+.contact-brand .domain {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.contact-qr {
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 8px;
+  line-height: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+}
+
+.contact-front-bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.contact-front-bottom strong {
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.contact-front-bottom span {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+}
+
+.contact-front-bottom .muted {
+  font-size: 0.64rem;
+  color: var(--color-text-muted);
+}
+
+.contact-back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  gap: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-alt),
+    color-mix(in srgb, var(--color-bg-alt) 75%, transparent)
+  );
+  border: 1px solid var(--color-border-hover);
+  box-shadow: 0 18px 44px var(--color-accent-glow);
+}
+
+.contact-back-title {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-row svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.contact-row-label {
+  min-width: 58px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.contact-row-value {
+  font-size: 0.68rem;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-caption {
+  color: var(--color-text-muted);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+/* ── Open-to statement ── */
+.contact-open-to {
+  max-width: 620px;
+  margin: 64px auto 0;
+  text-align: center;
+  padding: 22px 26px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+}
+
+.contact-open-to p {
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.85;
+}
+
+/* ── Action buttons ── */
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.35);
+  background: transparent;
+  color: var(--color-text);
+  transition: all 0.25s;
+}
+
+.contact-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-link);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--color-accent-glow);
+}
+
+.contact-btn.primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.contact-btn.primary:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-accent-text);
+}
+
+.contact-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.contact-footer-note {
+  margin-top: 34px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.64rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-face,
+  .contact-btn,
+  .contact-open-to {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .contact-hero {
+    padding: 56px 0 72px;
+  }
+
+  .contact-card-wrap {
+    padding-top: 48px;
+  }
+
+  .contact-row-value {
+    font-size: 0.64rem;
+  }
+}
