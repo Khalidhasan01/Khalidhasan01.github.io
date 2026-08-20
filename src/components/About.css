@@ -1,9 +1,9 @@
 .about-page {
-  padding-top: 56px;
+  padding-top: 0;
 }
 
 .about-hero {
-  padding: 56px 0 96px;
+  padding: 24px 0 96px;
 }
 
 .about-intro { max-width: 760px; }
@@ -162,7 +162,7 @@
 }
 
 @media (max-width: 760px) {
-  .about-hero { padding: 42px 0 68px; }
+  .about-hero { padding: 24px 0 68px; }
   .about-summary, .about-two-column { grid-template-columns: 1fr; }
   .about-summary { padding-top: 42px; }
   .about-section { padding: 64px 0; }
@@ -177,4 +177,18 @@
   .about-principles h3 { margin-top: 22px; }
   .about-contact-links { flex-direction: column; }
   .about-contact-links a { justify-content: center; }
+}
+
+@media (max-width: 360px) {
+  .about-hero { padding: 20px 0 64px; }
+  .about-section { padding: 56px 0; }
+  .about-hello { padding: 56px 0 72px; }
+  .about-location { padding: 16px; }
+  .about-timeline span,
+  .about-tool p,
+  .about-principles p,
+  .about-tags span,
+  .about-contact-links a {
+    font-size: 0.7rem;
+  }
 }

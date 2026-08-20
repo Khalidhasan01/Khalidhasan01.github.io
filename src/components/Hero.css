@@ -2,7 +2,7 @@
 .hero {
   display: flex;
   justify-content: center;
-  padding: 96px 0 64px;
+  padding: 40px 0 64px;
 }
 
 .hero-inner {
@@ -26,17 +26,14 @@
 }
 
 .hero-avatar {
-  width: 52px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--color-accent), var(--color-accent-link));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-accent-text);
   flex-shrink: 0;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid var(--color-border);
 }
 
 .hero-meta {
@@ -179,6 +176,27 @@
 
   .hero {
     min-height: auto;
-    padding: 112px 0 72px;
+    padding: 40px 0 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 32px 0 64px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-secondary {
+    justify-content: center;
+    min-height: 42px;
+  }
+
+  .hero-socials {
+    gap: 14px;
   }
 }

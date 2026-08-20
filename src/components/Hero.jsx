@@ -3,6 +3,7 @@ import { Mail, ChevronRight } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import GitHubCard from './GitHubCard';
 import Magnetic from './Magnetic';
+import profileImg from '../assets/profile.jpeg';
 import './Hero.css';
 
 const headlineContainer = {
@@ -42,7 +43,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <div className="hero-identity">
-              <div className="hero-avatar">KH</div>
+              <img className="hero-avatar" src={profileImg} alt="Khalid Hasan" />
               <div className="hero-meta">
                 <span className="hero-name">Khalid Hasan</span>
                 <span className="hero-role">
@@ -111,7 +112,7 @@ export default function Hero() {
               >
                 <LinkedinIcon size={14} /> linkedin
               </a>
-              <a href="mailto:khalidhasan842@gmail.com">
+              <a href="mailto:khalid.hasan@selisegroup.com">
                 <Mail size={14} /> email
               </a>
             </div>

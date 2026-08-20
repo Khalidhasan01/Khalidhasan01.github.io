@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  position: relative;
 }
 
 .projects-header {
@@ -22,6 +23,40 @@
 
 .projects-header .section-label {
   margin-bottom: 0;
+}
+
+.projects-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  color: var(--color-text-secondary);
+  transition: all 0.25s;
+}
+
+.projects-view-all:hover {
+  color: var(--color-accent-link);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 16px var(--color-accent-glow);
+}
+
+.projects-view-all:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.projects-view-all svg {
+  transition: transform 0.25s;
 }
 
 .project-card {

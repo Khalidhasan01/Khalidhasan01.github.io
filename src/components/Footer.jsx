@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
+import Magnetic from './Magnetic';
 import './Footer.css';
 
 export default function Footer() {
@@ -20,25 +21,31 @@ export default function Footer() {
           </h2>
 
           <div className="footer-links">
-            <a
-              href="https://github.com/Khalidhasan01"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-link"
-            >
-              <GithubIcon size={15} /> GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/khalidhasan"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-link"
-            >
-              <LinkedinIcon size={15} /> LinkedIn
-            </a>
-            <a href="mailto:khalidhasan842@gmail.com" className="footer-link">
-              <Mail size={15} /> Email
-            </a>
+            <Magnetic>
+              <a
+                href="https://github.com/Khalidhasan01"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-link"
+              >
+                <GithubIcon size={15} /> GitHub
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="https://linkedin.com/in/khalidhasan"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-link"
+              >
+                <LinkedinIcon size={15} /> LinkedIn
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a href="mailto:khalid.hasan@selisegroup.com" className="footer-link">
+                <Mail size={15} /> Email
+              </a>
+            </Magnetic>
           </div>
 
           <p className="footer-copy">

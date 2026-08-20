@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 /* ==========================================================================
-   khalid.dev — Theme Variables
+   khalid.github.io — Theme Variables
    Light mode: off-white / cream editorial, blue accent
    Dark mode:  matching brand, not just an inverted palette
    ========================================================================== */
@@ -55,6 +55,8 @@
   /* ── Spacing ── */
   --section-gap: 96px;
   --container-max: 1100px;
+  --navbar-height: 56px;
+  --navbar-offset: calc(var(--navbar-height) + env(safe-area-inset-top, 0px));
   --radius: 12px;
   --radius-sm: 8px;
 
@@ -99,6 +101,25 @@
   color-scheme: dark;
 }
 
+/* ── Responsive tiering ── */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1240px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-gap: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-gap: 56px;
+  }
+}
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -108,6 +129,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: clip;
 }
 
 body {
@@ -117,7 +139,7 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -164,6 +186,12 @@ button {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 18px;
+  }
 }
 
 .section-label {
@@ -223,5 +251,20 @@ section[id] {
   .theme-switching *::before,
   .theme-switching *::after {
     transition: none !important;
+  }
+}
+
+/* ── Touch targets on mobile ── */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary,
+  .contact-btn,
+  .projects-tab,
+  .projects-cta,
+  .filter-chip,
+  .footer-link,
+  .about-contact-links a,
+  .hero-socials a {
+    min-height: 40px;
   }
 }

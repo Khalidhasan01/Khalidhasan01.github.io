@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Monitor, Server, Smartphone, ArrowRight } from 'lucide-react';
+import { pageUrl } from '../lib/paths';
 import './WhatIDo.css';
 
 const services = [
@@ -30,7 +31,7 @@ const gridItem = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-export default function WhatIDo() {
+export default function WhatIDo({ onNavigate }) {
   return (
     <section className="whatido-section">
       <div className="container">
@@ -45,8 +46,9 @@ export default function WhatIDo() {
             what i do
           </motion.p>
           <motion.a
-            href="#about"
+            href={pageUrl('about')}
             className="whatido-link"
+            onClick={(event) => onNavigate?.('about', event)}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

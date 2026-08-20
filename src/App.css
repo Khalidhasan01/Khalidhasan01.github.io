@@ -28,7 +28,7 @@
   z-index: 0;
 }
 
-.app > * {
+.app > *:not(.navbar-shell):not(.navbar-spacer):not(.scroll-progress) {
   position: relative;
   z-index: 1;
 }

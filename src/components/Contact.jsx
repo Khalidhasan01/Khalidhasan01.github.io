@@ -8,10 +8,10 @@ import TiltCard from './TiltCard';
 import Magnetic from './Magnetic';
 import './Contact.css';
 
-const EMAIL = 'khalidhasan842@gmail.com';
+const EMAIL = 'khalid.hasan@selisegroup.com';
 const GITHUB_URL = 'https://github.com/Khalidhasan01';
 const LINKEDIN_URL = 'https://linkedin.com/in/khalidhasan';
-const SITE_URL = 'https://khalidhasan.github.io/My_portfolio/';
+const SITE_URL = 'https://khalidhasan01.github.io/';
 
 const backRows = [
   { icon: <Mail size={15} />, label: 'Email', value: EMAIL },
@@ -118,7 +118,7 @@ export default function Contact() {
                         <span className="contact-brand">
                           <i className="dot" />
                           <span>khalid</span>
-                          <span className="domain">.dev</span>
+                          <span className="domain">.github.io</span>
                         </span>
                         <span className="contact-qr">
                           <QRCodeSVG value={SITE_URL} size={64} fgColor="#111827" bgColor="#ffffff" />

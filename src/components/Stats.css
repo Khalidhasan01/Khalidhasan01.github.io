@@ -76,4 +76,12 @@
   .stats-grid {
     grid-template-columns: 1fr;
   }
+
+  .stat-card {
+    padding: 24px 20px 22px;
+  }
+
+  .stat-number {
+    font-size: 2.1rem;
+  }
 }

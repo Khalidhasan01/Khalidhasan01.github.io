@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Stats from './components/Stats';
 import WhatIDo from './components/WhatIDo';
 import Projects from './components/Projects';
+import ProjectsPage from './components/ProjectsPage';
 import TechStack from './components/TechStack';
 import Footer from './components/Footer';
 import Blobs from './components/Blobs';
@@ -63,6 +64,15 @@ function App() {
       return;
     }
 
+    if (destination === 'projects') {
+      if (page !== 'projects') {
+        window.history.pushState({}, '', pageUrl('projects'));
+        setPage('projects');
+      }
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+
     if (destination === 'about') {
       if (page !== 'about') {
         window.history.pushState({}, '', pageUrl('about'));
@@ -81,7 +91,7 @@ function App() {
       return;
     }
 
-    if (page === 'about' || page === 'contact') {
+    if (page === 'about' || page === 'contact' || page === 'projects') {
       window.history.pushState({}, '', hashUrl(destination));
       setPage('home');
       requestAnimationFrame(() => {
@@ -159,7 +169,9 @@ function App() {
         page={page}
         onNavigate={handleNavigate}
       />
-      {page === 'about' ? (
+      {page === 'projects' ? (
+        <ProjectsPage onNavigate={handleNavigate} />
+      ) : page === 'about' ? (
         <About />
       ) : page === 'contact' ? (
         <Contact />
@@ -167,12 +179,12 @@ function App() {
         <>
           <Hero />
           <Stats />
-          <WhatIDo />
-          <Projects activeTech={activeTech} onSelectTech={handleSelectTech} />
+          <WhatIDo onNavigate={handleNavigate} />
+          <Projects activeTech={activeTech} onSelectTech={handleSelectTech} onNavigate={handleNavigate} />
           <TechStack />
-          <Footer />
         </>
       )}
+      <Footer />
     </div>
   );
 }

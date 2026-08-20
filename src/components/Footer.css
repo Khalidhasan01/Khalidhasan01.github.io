@@ -55,6 +55,12 @@
   color: var(--color-accent-link);
 }
 
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 72px;
+  }
+}
+
 @media (max-width: 600px) {
   .footer-links {
     flex-direction: column;

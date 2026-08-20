@@ -1,15 +1,11 @@
 import { motion } from 'framer-motion';
 import {
-  ArrowUpRight,
   BriefcaseBusiness,
   Code2,
-  Mail,
   MapPin,
   Sparkles,
   Wrench,
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './BrandIcons';
-import Magnetic from './Magnetic';
 import './About.css';
 
 const timeline = [
@@ -61,12 +57,6 @@ const highlights = [
   'Full-stack ownership across LZTBCare—from Kotlin/Spring Boot backend to React frontend features.',
   'Solo end-to-end build of FitMonitor: architecture, backend, database, and deployment planning.',
   'Transitioned from Angular to React mid-project and became productive in a live codebase.',
-];
-
-const helloLinks = [
-  { label: 'github', icon: <GithubIcon size={16} />, href: 'https://github.com/Khalidhasan01', external: true },
-  { label: 'email me', icon: <Mail size={16} />, href: 'mailto:khalidhasan842@gmail.com' },
-  { label: 'linkedin', icon: <LinkedinIcon size={16} />, href: 'https://linkedin.com/in/khalidhasan', external: true },
 ];
 
 const headlineWords = ["I'm", { text: 'Khalid', accent: true }, 'Hasan.'];
@@ -331,35 +321,6 @@ export default function About() {
               <motion.li key={i} variants={highlightsItem}>{h}</motion.li>
             ))}
           </motion.ul>
-        </motion.div>
-      </section>
-
-      <section className="about-hello" id="contact">
-        <motion.div
-          className="container"
-          variants={columnContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-        >
-          <motion.p className="section-label" variants={columnItem}>Say hello</motion.p>
-          <motion.h2 variants={columnItem}>Let’s make something useful.</motion.h2>
-          <motion.div className="about-contact-links">
-            {helloLinks.map((l, i) => (
-              <Magnetic key={l.label}>
-                <motion.a
-                  href={l.href}
-                  {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.4, delay: 0.15 + i * 0.08 }}
-                >
-                  {l.icon} {l.label} <ArrowUpRight size={14} />
-                </motion.a>
-              </Magnetic>
-            ))}
-          </motion.div>
         </motion.div>
       </section>
     </main>
