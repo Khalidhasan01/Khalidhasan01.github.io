@@ -18,6 +18,12 @@ export const setLenis = (instance) => {
 
 export const getLenis = () => lenis;
 
+/**
+ * Current scroll velocity in px/frame, signed. 0 when smooth scroll is off,
+ * so callers can use it unconditionally.
+ */
+export const getScrollVelocity = () => lenis?.velocity ?? 0;
+
 const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;

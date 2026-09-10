@@ -2,3 +2,7 @@
   display: inline-block;
   will-change: transform;
 }
+
+.magnetic-inner {
+  display: inline-flex;
+}

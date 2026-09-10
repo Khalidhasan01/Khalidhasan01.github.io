@@ -89,6 +89,11 @@ const screeningRows = [
 
 const scopeLabel = (p) => (p.nda ? 'work · client (NDA)' : p.scope);
 
+/* Personal projects typed 'personal' rendered the same word twice — once as
+   the type badge, once as the scope badge. Show the scope only when it adds
+   something the type badge didn't already say. */
+const showsScope = (p) => scopeLabel(p) !== p.typeLabel;
+
 export default function ProjectsPage({ onNavigate }) {
   const [filter, setFilter] = useState('all');
 
@@ -233,7 +238,7 @@ export default function ProjectsPage({ onNavigate }) {
               {gridProjects.map((p, i) => (
                 <TiltCard
                   key={p.name}
-                  className="project-card project-card-page"
+                  className={`project-card project-card-page type-${p.type}`}
                   layout
                   initial={{ opacity: 0, y: 28, scale: 0.97 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -242,11 +247,14 @@ export default function ProjectsPage({ onNavigate }) {
                   transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.05 }}
                   whileHover={{ y: -8, transition: { type: 'spring', stiffness: 350, damping: 24 } }}
                 >
+                  <span className="project-cover" aria-hidden="true" />
                   <div className="project-card-header">
                     <div className="project-icon">{<p.icon size={18} />}</div>
                     <div className="project-badges">
                       <span className={`project-type ${p.type}`}>{p.typeLabel}</span>
-                      <span className={`project-scope ${p.scope}`}>{scopeLabel(p)}</span>
+                      {showsScope(p) && (
+                        <span className={`project-scope ${p.scope}`}>{scopeLabel(p)}</span>
+                      )}
                     </div>
                   </div>
                   <div className="project-name">{p.name}</div>

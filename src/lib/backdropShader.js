@@ -29,6 +29,7 @@ export const fragment = /* glsl */ `
   uniform vec3 uColorB;
   uniform vec3 uColorC;
   uniform float uIntensity;
+  uniform float uVelocity;
 
   varying vec2 vUv;
 
@@ -77,7 +78,14 @@ export const fragment = /* glsl */ `
 
   void main() {
     float aspect = uResolution.x / max(uResolution.y, 1.0);
-    vec2 p = vec2(vUv.x * aspect, vUv.y) * 1.05;
+    /*
+     * Scroll velocity stretches the field vertically and lifts its intensity,
+     * so the atmosphere reacts to how fast the page is moving. A text skew is
+     * the usual way to spend scroll velocity, but it fights a monospace
+     * editorial layout; pushing it into the backdrop costs no legibility.
+     */
+    float vel = clamp(abs(uVelocity) / 60.0, 0.0, 1.0);
+    vec2 p = vec2(vUv.x * aspect, vUv.y / (1.0 + vel * 0.45)) * 1.05;
     float t = uTime * 0.045;
 
     // Domain warp: noise offset by noise, which is what turns bland fbm into
@@ -102,7 +110,7 @@ export const fragment = /* glsl */ `
     float edge = smoothstep(0.3, 1.05, max(d.x, d.y) * 0.75 + length(d) * 0.4);
 
     float ambient = smoothstep(0.4, 1.0, n) * edge;
-    float alpha = (ambient * 0.9 + glow * 0.55) * uIntensity;
+    float alpha = (ambient * 0.9 + glow * 0.55) * uIntensity * (1.0 + vel * 0.5);
 
     gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
   }

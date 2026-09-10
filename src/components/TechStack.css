@@ -132,7 +132,8 @@
   background: rgba(var(--cat-rgb), 0.06);
   border: 1px solid rgba(var(--cat-rgb), 0.22);
   color: var(--color-text-secondary);
-  cursor: default;
+  cursor: pointer;
+  font-family: var(--font);
   transition:
     border-color 0.25s,
     background 0.25s,
@@ -193,4 +194,25 @@
   .tech-category-icon {
     transition: none;
   }
+}
+
+/*
+ * Selected state. Clicking a pill filters the featured-projects grid and
+ * scrolls to it; this marks which one is driving the filter so the
+ * connection between the two sections is visible.
+ */
+.tech-pill.is-active {
+  background: rgba(var(--cat-rgb), 0.2);
+  border-color: var(--cat);
+  color: var(--color-text);
+  box-shadow: 0 0 0 1px var(--cat) inset;
+}
+
+.tech-pill.is-active .tech-pill-dot {
+  transform: scale(1.4);
+}
+
+.tech-pill:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }

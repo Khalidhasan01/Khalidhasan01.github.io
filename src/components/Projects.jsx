@@ -92,12 +92,13 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
             return (
               <TiltCard
                 key={p.name}
-                className={`project-card ${p.flagship ? 'featured' : ''} ${
+                className={`project-card type-${p.type} ${p.flagship ? 'featured' : ''} ${
                   highlighted ? 'is-highlighted' : ''
                 } ${dimmed ? 'is-filtered-out' : ''}`}
                 variants={gridItem}
                 whileHover={{ y: -8, transition: spring.lift }}
               >
+                <span className="project-cover" aria-hidden="true" />
                 <div className="project-card-header">
                   <div className="project-icon">{<p.icon size={18} />}</div>
                   <div className="project-badges">

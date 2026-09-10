@@ -99,7 +99,7 @@ const pillContainer = stagger(0.025);
 const pillItem = popIn();
 const sectionLabel = fadeUp();
 
-export default function TechStack() {
+export default function TechStack({ activeTech = null, onSelectTech }) {
   const handlePillMove = useSpotlight();
 
   return (
@@ -136,20 +136,24 @@ export default function TechStack() {
 
               <motion.div className="tech-pills" variants={pillContainer}>
                 {cat.items.map((item) => (
-                  <motion.span
+                  <motion.button
                     key={item}
-                    className="tech-pill"
+                    type="button"
+                    className={`tech-pill ${activeTech === item ? 'is-active' : ''}`}
+                    aria-pressed={activeTech === item}
+                    onClick={() => onSelectTech?.(item)}
                     variants={pillItem}
                     whileHover={{
                       y: -2,
                       scale: 1.05,
                       transition: spring.pill,
                     }}
+                    whileTap={{ scale: 0.96 }}
                     onMouseMove={handlePillMove}
                   >
                     <span className="tech-pill-dot" />
                     <span className="tech-pill-text">{item}</span>
-                  </motion.span>
+                  </motion.button>
                 ))}
               </motion.div>
             </motion.div>

@@ -185,7 +185,7 @@ function App() {
                   onSelectTech={handleSelectTech}
                   onNavigate={handleNavigate}
                 />
-                <TechStack />
+                <TechStack activeTech={activeTech} onSelectTech={handleSelectTech} />
               </>
             )}
           </Suspense>

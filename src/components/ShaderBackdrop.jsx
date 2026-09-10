@@ -3,6 +3,7 @@ import { frame, cancelFrame } from 'framer-motion';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import { fragment, vertex } from '../lib/backdropShader';
 import { readBackdropPalette } from '../lib/themeColors';
+import { getScrollVelocity } from '../lib/smoothScroll';
 import Blobs from './Blobs';
 import './ShaderBackdrop.css';
 
@@ -79,6 +80,7 @@ export default function ShaderBackdrop() {
           uColorB: { value: [...palette.b] },
           uColorC: { value: [...palette.c] },
           uIntensity: { value: 0 },
+          uVelocity: { value: 0 },
         },
       });
       /*
@@ -140,6 +142,7 @@ export default function ShaderBackdrop() {
 
     /* ── Loop ── */
     let elapsed = 0;
+    let velocity = 0;
     let running = true;
 
     const update = ({ delta }) => {
@@ -160,7 +163,12 @@ export default function ShaderBackdrop() {
         }
       }
 
+      // Damped so a flick of the wheel swells the backdrop and settles,
+      // rather than strobing with every velocity sample.
+      velocity = damp(velocity, getScrollVelocity(), 0.86, dt);
+
       u.uTime.value = elapsed;
+      u.uVelocity.value = velocity;
       u.uMouse.value = [pointer.x, pointer.y];
       u.uMouseStrength.value = pointer.strength;
       // Fade in over the first second so the backdrop arrives rather than blinks on.
