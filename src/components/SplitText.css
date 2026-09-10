@@ -2,8 +2,19 @@
 
 .split-word {
   display: inline-block;
-  margin-right: 0.22em;
   white-space: nowrap;
+}
+
+/*
+ * Holds a real space character so the headline copies and indexes as words,
+ * but renders at the tighter display tracking the design calls for rather
+ * than the font's full monospace space.
+ */
+.split-space {
+  display: inline-block;
+  width: 0.22em;
+  overflow: hidden;
+  white-space: pre;
 }
 
 /*

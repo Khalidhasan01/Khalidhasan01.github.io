@@ -3,6 +3,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { pageUrl } from '../lib/paths';
 import { lockScroll, unlockScroll } from '../lib/smoothScroll';
+import { prefetchPage } from '../lib/pageLoaders';
 import './Navbar.css';
 
 export default function Navbar({ theme, onToggleTheme, page, onNavigate }) {
@@ -71,6 +72,8 @@ export default function Navbar({ theme, onToggleTheme, page, onNavigate }) {
           href={href}
           className={isActive(label) ? 'active' : undefined}
           onClick={(event) => navigate(label, event)}
+          onMouseEnter={() => prefetchPage(label)}
+          onFocus={() => prefetchPage(label)}
         >
           {label}
         </a>

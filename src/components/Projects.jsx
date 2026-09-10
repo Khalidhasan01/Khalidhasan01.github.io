@@ -4,6 +4,7 @@ import { X, ArrowUpRight } from 'lucide-react';
 import TiltCard from './TiltCard';
 import { projects } from '../lib/projects';
 import { matchProjects } from '../lib/techMatch';
+import { prefetchPage } from '../lib/pageLoaders';
 import {
   distance,
   fadeUp,
@@ -61,6 +62,7 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
               className="projects-view-all"
               href="#projects"
               onClick={(event) => onNavigate?.('projects', event)}
+              onMouseEnter={() => prefetchPage('projects')}
               variants={viewAll}
               initial="hidden"
               whileInView="show"

@@ -1,21 +1,30 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import WhatIDo from './components/WhatIDo';
 import Projects from './components/Projects';
-import ProjectsPage from './components/ProjectsPage';
 import TechStack from './components/TechStack';
 import Footer from './components/Footer';
 import Blobs from './components/Blobs';
-import About from './components/About';
-import Contact from './components/Contact';
 import SmoothScroll from './components/SmoothScroll';
+import PageTransition, { PageSweep } from './components/PageTransition';
 import { pageFromPath, pageUrl, hashUrl, PAGES } from './lib/paths';
+import { pageLoaders } from './lib/pageLoaders';
 import { scrollToId, scrollToTop } from './lib/smoothScroll';
 import './App.css';
+
+/*
+ * Sub-pages load on demand. Contact alone drags in html-to-image and
+ * qrcode.react, which every visitor used to download whether or not they
+ * ever opened it. Links warm their chunk on hover (see pageLoaders), so by
+ * the time a click lands the chunk is usually already there.
+ */
+const ProjectsPage = lazy(pageLoaders.projects);
+const About = lazy(pageLoaders.about);
+const Contact = lazy(pageLoaders.contact);
 
 function App() {
   const [theme, setTheme] = useState(() =>
@@ -60,6 +69,9 @@ function App() {
       if (page !== destination) {
         window.history.pushState({}, '', pageUrl(destination));
         setPage(destination);
+        // Scroll reset happens in AnimatePresence's onExitComplete, once the
+        // outgoing page is gone — resetting here would yank it mid-exit.
+        return;
       }
       scrollToTop();
       return;
@@ -102,11 +114,21 @@ function App() {
         flushSync(() => setTheme(next));
       });
 
-      transition.finished.finally(() => {
-        root.style.removeProperty('--reveal-x');
-        root.style.removeProperty('--reveal-y');
-        root.style.removeProperty('--reveal-r');
-      });
+      /*
+       * A ViewTransition exposes three promises, and an aborted transition
+       * rejects all of them — hitting the toggle again mid-reveal is enough.
+       * Every one needs a handler or it surfaces as an unhandled rejection,
+       * so silence them all and clean up regardless of how it ended.
+       */
+      transition.ready.catch(() => {});
+      transition.updateCallbackDone?.catch(() => {});
+      transition.finished
+        .catch(() => {})
+        .finally(() => {
+          root.style.removeProperty('--reveal-x');
+          root.style.removeProperty('--reveal-y');
+          root.style.removeProperty('--reveal-r');
+        });
       return;
     }
 
@@ -136,6 +158,7 @@ function App() {
     <div className="app">
       <SmoothScroll />
       <motion.div className="scroll-progress" style={{ scaleX: scrollProgress }} />
+      <PageSweep key={`sweep-${page}`} />
       <Blobs />
       <Navbar
         theme={theme}
@@ -143,21 +166,31 @@ function App() {
         page={page}
         onNavigate={handleNavigate}
       />
-      {page === 'projects' ? (
-        <ProjectsPage onNavigate={handleNavigate} />
-      ) : page === 'about' ? (
-        <About />
-      ) : page === 'contact' ? (
-        <Contact />
-      ) : (
-        <>
-          <Hero />
-          <Stats />
-          <WhatIDo onNavigate={handleNavigate} />
-          <Projects activeTech={activeTech} onSelectTech={handleSelectTech} onNavigate={handleNavigate} />
-          <TechStack />
-        </>
-      )}
+      <AnimatePresence mode="wait" onExitComplete={() => scrollToTop()}>
+        <PageTransition key={page}>
+          <Suspense fallback={<div className="page-loading" aria-busy="true" />}>
+            {page === 'projects' ? (
+              <ProjectsPage onNavigate={handleNavigate} />
+            ) : page === 'about' ? (
+              <About />
+            ) : page === 'contact' ? (
+              <Contact />
+            ) : (
+              <>
+                <Hero />
+                <Stats />
+                <WhatIDo onNavigate={handleNavigate} />
+                <Projects
+                  activeTech={activeTech}
+                  onSelectTech={handleSelectTech}
+                  onNavigate={handleNavigate}
+                />
+                <TechStack />
+              </>
+            )}
+          </Suspense>
+        </PageTransition>
+      </AnimatePresence>
       <Footer />
     </div>
   );

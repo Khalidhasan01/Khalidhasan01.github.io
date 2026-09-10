@@ -1,0 +1,18 @@
+/* Accent line that wipes across on every page change. Sits just under the
+   scroll-progress bar so the two never overlap. */
+.page-sweep {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 199;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 35%,
+    var(--color-accent-link) 65%,
+    transparent
+  );
+}

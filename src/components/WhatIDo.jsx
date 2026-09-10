@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Monitor, Server, Smartphone, ArrowRight } from 'lucide-react';
 import { pageUrl } from '../lib/paths';
+import { prefetchPage } from '../lib/pageLoaders';
 import {
   distance,
   fadeIn,
@@ -52,6 +53,7 @@ export default function WhatIDo({ onNavigate }) {
             href={pageUrl('about')}
             className="whatido-link"
             onClick={(event) => onNavigate?.('about', event)}
+            onMouseEnter={() => prefetchPage('about')}
             variants={link}
             initial="hidden"
             whileInView="show"

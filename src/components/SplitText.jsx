@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ease, stagger } from '../lib/motion';
 import './SplitText.css';
@@ -25,10 +26,14 @@ const wordClass = (w) =>
 
 const wordText = (w) => (typeof w === 'object' ? w.text : w);
 
-/* `attached` punctuation has to cancel the *preceding* word's trailing
-   margin — nudging its own does nothing, since the gap sits to its left. */
-const wordStyle = (w) =>
-  typeof w === 'object' && w.attached ? { marginLeft: '-0.22em' } : undefined;
+/*
+ * Word gaps are real space characters in their own element, not margin.
+ * Margin looks identical but leaves the DOM text as "I'mKhalidHasan." — which
+ * is what gets copied, indexed, and read by anything that walks text nodes.
+ * `.split-space` carries the space and sets the gap width in CSS.
+ */
+const needsSpace = (words, i) =>
+  i > 0 && !(typeof words[i] === 'object' && words[i].attached);
 
 export default function SplitText({
   words,
@@ -49,9 +54,10 @@ export default function SplitText({
     return (
       <Tag className={className} {...rest}>
         {words.map((w, i) => (
-          <span key={i} className={`split-word ${wordClass(w) ?? ''}`} style={wordStyle(w)}>
-            {wordText(w)}
-          </span>
+          <Fragment key={i}>
+            {needsSpace(words, i) && ' '}
+            <span className={wordClass(w)}>{wordText(w)}</span>
+          </Fragment>
         ))}
       </Tag>
     );
@@ -72,20 +78,18 @@ export default function SplitText({
       {...rest}
     >
       {words.map((w, i) => (
-        <span
-          key={i}
-          className={`split-word ${wordClass(w) ?? ''}`}
-          aria-hidden="true"
-          style={wordStyle(w)}
-        >
-          {[...wordText(w)].map((char, j) => (
-            <span key={j} className="split-mask">
-              <motion.span className="split-char" variants={charVariants}>
-                {char}
-              </motion.span>
-            </span>
-          ))}
-        </span>
+        <Fragment key={i}>
+          {needsSpace(words, i) && <span className="split-space"> </span>}
+          <span className={`split-word ${wordClass(w) ?? ''}`} aria-hidden="true">
+            {[...wordText(w)].map((char, j) => (
+              <span key={j} className="split-mask">
+                <motion.span className="split-char" variants={charVariants}>
+                  {char}
+                </motion.span>
+              </span>
+            ))}
+          </span>
+        </Fragment>
       ))}
     </MotionTag>
   );

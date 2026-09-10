@@ -84,3 +84,9 @@
   transform-origin: 0 0;
   z-index: 200;
 }
+
+/* Holds vertical space while a lazily-loaded page chunk arrives, so the
+   footer doesn't jump up for a frame on first visit to a sub-page. */
+.page-loading {
+  min-height: 70vh;
+}
