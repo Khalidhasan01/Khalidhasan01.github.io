@@ -6,6 +6,8 @@ import { Mail, Copy, Check, Download } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import TiltCard from './TiltCard';
 import Magnetic from './Magnetic';
+import SplitText from './SplitText';
+import { ease, fadeUp, viewportOnce } from '../lib/motion';
 import './Contact.css';
 
 const EMAIL = 'khalid.hasan@selisegroup.com';
@@ -19,12 +21,11 @@ const backRows = [
   { icon: <LinkedinIcon size={15} />, label: 'LinkedIn', value: 'in/khalidhasan' },
 ];
 
-const reveal = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
-};
+const headlineWords = ['Let\u2019s', 'talk', { text: '.', accent: true, attached: true }];
 
-const viewportOnce = { once: true, amount: 0.2 };
+const intro = fadeUp(0.08);
+const cardWrap = fadeUp(0.2);
+const reveal = fadeUp();
 
 export default function Contact() {
   const [flipped, setFlipped] = useState(false);
@@ -72,15 +73,12 @@ export default function Contact() {
         <div className="container">
           <motion.div
             className="contact-intro"
-            variants={reveal}
+            variants={intro}
             initial="hidden"
             animate="show"
-            transition={{ duration: 0.55, delay: 0.08 }}
           >
             <p className="section-label">&gt;_ Contact</p>
-            <h1>
-              Let&rsquo;s talk<span className="accent">.</span>
-            </h1>
+            <SplitText as="h1" words={headlineWords} delay={0.2} />
             <p className="contact-lede">
               Move your cursor over the card to tilt it &mdash; click or tap to
               flip for how to reach me.
@@ -89,10 +87,9 @@ export default function Contact() {
 
           <motion.div
             className="contact-card-wrap"
-            variants={reveal}
+            variants={cardWrap}
             initial="hidden"
             animate="show"
-            transition={{ duration: 0.55, delay: 0.2 }}
           >
             <div className="contact-stage">
               <TiltCard
@@ -110,7 +107,7 @@ export default function Contact() {
                   <motion.div
                     className="contact-card-inner"
                     animate={{ rotateY: flipped ? 180 : 0 }}
-                    transition={{ duration: reduce ? 0 : 0.6, ease: 'easeInOut' }}
+                    transition={{ duration: reduce ? 0 : 0.6, ease: ease.inOut }}
                     style={{ transformStyle: 'preserve-3d' }}
                   >
                     <div className="contact-face contact-front">
@@ -154,7 +151,6 @@ export default function Contact() {
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <p>
               Open to full-stack engineering opportunities &mdash;
@@ -168,7 +164,6 @@ export default function Contact() {
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <Magnetic>
               <a className="contact-btn primary" href={`mailto:${EMAIL}`}>

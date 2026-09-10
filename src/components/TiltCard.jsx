@@ -1,10 +1,12 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { spring } from '../lib/motion';
+import { applySpotlight } from '../lib/useSpotlight';
 
 export default function TiltCard({ children, ...props }) {
   const ref = useRef(null);
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+  const rotateX = useSpring(useMotionValue(0), spring.tilt);
+  const rotateY = useSpring(useMotionValue(0), spring.tilt);
 
   const handleMouseMove = (e) => {
     const el = ref.current;
@@ -13,8 +15,7 @@ export default function TiltCard({ children, ...props }) {
     const py = (e.clientY - r.top) / r.height - 0.5;
     rotateX.set(py * -8);
     rotateY.set(px * 8);
-    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    applySpotlight(el, e.clientX, e.clientY);
   };
 
   const reset = () => {

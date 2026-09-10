@@ -7,6 +7,17 @@ import {
   TerminalSquare,
   Plug,
 } from 'lucide-react';
+import {
+  fadeUp,
+  popIn,
+  slideX,
+  spring,
+  stagger,
+  staggerTight,
+  viewportEarly,
+  viewportOnce,
+} from '../lib/motion';
+import { useSpotlight } from '../lib/useSpotlight';
 import './TechStack.css';
 
 const categories = [
@@ -81,48 +92,25 @@ const categories = [
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-
-const categoryItem = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.04 } },
-};
-
-const labelItem = {
-  hidden: { opacity: 0, x: -14 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: 'easeOut' } },
-};
-
-const pillContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.025 } },
-};
-
-const pillItem = {
-  hidden: { opacity: 0, y: 10, scale: 0.92 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, ease: 'easeOut' } },
-};
+const container = stagger(0.05);
+const categoryItem = staggerTight();
+const labelItem = slideX();
+const pillContainer = stagger(0.025);
+const pillItem = popIn();
+const sectionLabel = fadeUp();
 
 export default function TechStack() {
-  const handlePillMove = (e) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    el.style.setProperty('--my', `${e.clientY - r.top}px`);
-  };
+  const handlePillMove = useSpotlight();
 
   return (
     <section className="tech-section" id="tech-stack">
       <div className="container">
         <motion.p
           className="section-label"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          variants={sectionLabel}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
           tech stack
         </motion.p>
@@ -132,7 +120,7 @@ export default function TechStack() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={viewportEarly}
         >
           {categories.map((cat) => (
             <motion.div
@@ -155,7 +143,7 @@ export default function TechStack() {
                     whileHover={{
                       y: -2,
                       scale: 1.05,
-                      transition: { type: 'spring', stiffness: 400, damping: 25 },
+                      transition: spring.pill,
                     }}
                     onMouseMove={handlePillMove}
                   >

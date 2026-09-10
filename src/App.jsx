@@ -12,7 +12,9 @@ import Footer from './components/Footer';
 import Blobs from './components/Blobs';
 import About from './components/About';
 import Contact from './components/Contact';
-import { pageFromPath, pageUrl, hashUrl } from './lib/paths';
+import SmoothScroll from './components/SmoothScroll';
+import { pageFromPath, pageUrl, hashUrl, PAGES } from './lib/paths';
+import { scrollToId, scrollToTop } from './lib/smoothScroll';
 import './App.css';
 
 function App() {
@@ -32,13 +34,7 @@ function App() {
   const handleSelectTech = (name) => {
     const next = activeTech === name ? null : name;
     setActiveTech(next);
-    if (next) {
-      const reduce =
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document
-        .getElementById('projects')
-        ?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    }
+    if (next) scrollToId('projects');
   };
 
   useEffect(() => {
@@ -52,56 +48,33 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  /**
+   * `destination` is either a page name or a home-section id.
+   * Pages swap the view and start at the top; sections scroll, routing back
+   * to home first if we're not already there.
+   */
   const handleNavigate = (destination, event) => {
     event?.preventDefault();
 
-    if (destination === 'home') {
-      if (page !== 'home') {
-        window.history.pushState({}, '', pageUrl('home'));
-        setPage('home');
+    if (PAGES.includes(destination)) {
+      if (page !== destination) {
+        window.history.pushState({}, '', pageUrl(destination));
+        setPage(destination);
       }
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
-    }
-
-    if (destination === 'projects') {
-      if (page !== 'projects') {
-        window.history.pushState({}, '', pageUrl('projects'));
-        setPage('projects');
-      }
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
-    }
-
-    if (destination === 'about') {
-      if (page !== 'about') {
-        window.history.pushState({}, '', pageUrl('about'));
-        setPage('about');
-      }
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
-    }
-
-    if (destination === 'contact') {
-      if (page !== 'contact') {
-        window.history.pushState({}, '', pageUrl('contact'));
-        setPage('contact');
-      }
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
-    }
-
-    if (page === 'about' || page === 'contact' || page === 'projects') {
-      window.history.pushState({}, '', hashUrl(destination));
-      setPage('home');
-      requestAnimationFrame(() => {
-        document.getElementById(destination)?.scrollIntoView({ behavior: 'auto' });
-      });
+      scrollToTop();
       return;
     }
 
     window.history.pushState({}, '', hashUrl(destination));
-    document.getElementById(destination)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (page !== 'home') {
+      setPage('home');
+      // Wait for the home sections to mount before looking for the target.
+      requestAnimationFrame(() => scrollToId(destination, { immediate: true }));
+      return;
+    }
+
+    scrollToId(destination);
   };
 
   const toggleTheme = () => {
@@ -161,6 +134,7 @@ function App() {
 
   return (
     <div className="app">
+      <SmoothScroll />
       <motion.div className="scroll-progress" style={{ scaleX: scrollProgress }} />
       <Blobs />
       <Navbar

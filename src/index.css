@@ -126,8 +126,9 @@
   box-sizing: border-box;
 }
 
+/* No `scroll-behavior: smooth` here — it fights Lenis, which drives real
+   scroll itself. Reduced-motion users get instant jumps via scrollToId(). */
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   overflow-x: clip;
 }
@@ -203,8 +204,13 @@ button {
   margin-bottom: 32px;
 }
 
-section[id] {
-  scroll-margin-top: 72px;
+/* Lenis applies the navbar offset itself (NAV_OFFSET), so scroll-margin here
+   would double-count it. It's only needed on the reduced-motion path, which
+   falls back to native scrollIntoView. */
+@media (prefers-reduced-motion: reduce) {
+  section[id] {
+    scroll-margin-top: 72px;
+  }
 }
 
 /* ── Theme transition ── */

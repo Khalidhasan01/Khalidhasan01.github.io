@@ -6,6 +6,17 @@ import {
   Sparkles,
   Wrench,
 } from 'lucide-react';
+import SplitText from './SplitText';
+import {
+  distance,
+  fadeUp,
+  popIn,
+  slideX,
+  stagger,
+  staggerLoose,
+  viewportOnce,
+} from '../lib/motion';
+import { useSpotlight } from '../lib/useSpotlight';
 import './About.css';
 
 const timeline = [
@@ -61,88 +72,22 @@ const highlights = [
 
 const headlineWords = ["I'm", { text: 'Khalid', accent: true }, 'Hasan.'];
 
-/* ── Variants ── */
-const reveal = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
-};
-
-const wordContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-
-const wordItem = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
-
-const columnContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-
-const columnItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const timelineContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09 } },
-};
-
-const timelineItem = {
-  hidden: { opacity: 0, x: -18 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-};
-
-const directionContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-
-const directionItem = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const tagContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-
-const tagItem = {
-  hidden: { opacity: 0, scale: 0.9 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.3, ease: 'easeOut' } },
-};
-
-const toolItem = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-};
-
-const principleItem = {
-  hidden: { opacity: 0, y: 22, scale: 0.97 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const highlightsItem = {
-  hidden: { opacity: 0, x: 20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-};
-
-const viewportOnce = { once: true, amount: 0.2 };
+/* ── Variants — composed from the shared motion system ── */
+const intro = fadeUp(0.08);
+const columnContainer = stagger(0.1);
+const columnItem = fadeUp();
+const timelineContainer = stagger(0.09);
+const timelineItem = slideX(-distance.md);
+const directionContainer = staggerLoose();
+const directionItem = fadeUp();
+const tagContainer = stagger(0.05);
+const tagItem = popIn();
+const toolItem = fadeUp(0, distance.sm);
+const principleItem = fadeUp();
+const highlightsItem = slideX(distance.md);
 
 export default function About() {
-  const handleSpotlight = (e) => {
-    const cards = e.currentTarget.querySelectorAll('.about-principles article');
-    cards.forEach((card) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  };
+  const handleSpotlight = useSpotlight('.about-principles article');
 
   return (
     <main className="about-page">
@@ -150,28 +95,12 @@ export default function About() {
         <div className="container">
           <motion.div
             className="about-intro"
-            variants={reveal}
+            variants={intro}
             initial="hidden"
             animate="show"
-            transition={{ duration: 0.55, delay: 0.08 }}
           >
             <p className="section-label">&gt;_ About</p>
-            <motion.h1
-              variants={wordContainer}
-              initial="hidden"
-              animate="show"
-            >
-              {headlineWords.map((w, i) => (
-                <motion.span
-                  key={i}
-                  className={typeof w === 'object' && w.accent ? 'accent' : undefined}
-                  variants={wordItem}
-                  style={{ display: 'inline-block', marginRight: '0.22em' }}
-                >
-                  {typeof w === 'object' ? w.text : w}
-                </motion.span>
-              ))}
-            </motion.h1>
+            <SplitText as="h1" words={headlineWords} delay={0.1} />
             <p className="about-lede">
               A full-stack software engineer who likes understanding the system beneath the interface.
             </p>

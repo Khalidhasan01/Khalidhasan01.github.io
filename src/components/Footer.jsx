@@ -2,7 +2,10 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import Magnetic from './Magnetic';
+import { distance, fadeUp, viewportOnce } from '../lib/motion';
 import './Footer.css';
+
+const inner = fadeUp(0, distance.lg);
 
 export default function Footer() {
   return (
@@ -10,10 +13,10 @@ export default function Footer() {
       <div className="container">
         <motion.div
           className="footer-inner"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={inner}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
           <h2 className="footer-heading">
             Let's build something{' '}

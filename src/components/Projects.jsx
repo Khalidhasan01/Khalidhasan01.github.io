@@ -4,17 +4,20 @@ import { X, ArrowUpRight } from 'lucide-react';
 import TiltCard from './TiltCard';
 import { projects } from '../lib/projects';
 import { matchProjects } from '../lib/techMatch';
+import {
+  distance,
+  fadeUp,
+  spring,
+  staggerBase,
+  viewportEarly,
+  viewportOnce,
+} from '../lib/motion';
 import './Projects.css';
 
-const gridContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const gridItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
+const gridContainer = staggerBase();
+const gridItem = fadeUp(0, distance.lg);
+const label = fadeUp();
+const viewAll = fadeUp(0.1);
 
 export default function Projects({ activeTech = null, onSelectTech, onNavigate }) {
   const homeProjects = useMemo(() => projects.filter((p) => p.home), []);
@@ -29,10 +32,10 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
         <div className="projects-header">
           <motion.p
             className="section-label"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            variants={label}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
           >
             featured projects
           </motion.p>
@@ -58,10 +61,10 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
               className="projects-view-all"
               href="#projects"
               onClick={(event) => onNavigate?.('projects', event)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+              variants={viewAll}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
             >
               view all projects <ArrowUpRight size={14} />
             </motion.a>
@@ -73,7 +76,7 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
           variants={gridContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={viewportEarly}
         >
           {matchedIndexes !== null && matchedIndexes.length === 0 && (
             <div className="filter-empty">
@@ -91,7 +94,7 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
                   highlighted ? 'is-highlighted' : ''
                 } ${dimmed ? 'is-filtered-out' : ''}`}
                 variants={gridItem}
-                whileHover={{ y: -8, transition: { type: 'spring', stiffness: 350, damping: 24 } }}
+                whileHover={{ y: -8, transition: spring.lift }}
               >
                 <div className="project-card-header">
                   <div className="project-icon">{<p.icon size={18} />}</div>

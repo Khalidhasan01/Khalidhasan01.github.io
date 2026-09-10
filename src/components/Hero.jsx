@@ -3,18 +3,9 @@ import { Mail, ChevronRight } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import GitHubCard from './GitHubCard';
 import Magnetic from './Magnetic';
+import SplitText from './SplitText';
 import profileImg from '../assets/profile.jpeg';
 import './Hero.css';
-
-const headlineContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.45 } },
-};
-
-const headlineItem = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
 
 const headlineWords = [
   'I',
@@ -52,29 +43,12 @@ export default function Hero() {
               </div>
             </div>
 
-            <motion.h1
+            <SplitText
+              as="h1"
               className="hero-headline"
-              variants={headlineContainer}
-              initial="hidden"
-              animate="show"
-            >
-              {headlineWords.map((w, i) => (
-                <motion.span
-                  key={i}
-                  className={
-                    typeof w === 'object'
-                      ? w.dim
-                        ? 'dim'
-                        : 'accent'
-                      : undefined
-                  }
-                  variants={headlineItem}
-                  style={{ display: 'inline-block', marginRight: '0.22em' }}
-                >
-                  {typeof w === 'object' ? w.text : w}
-                </motion.span>
-              ))}
-            </motion.h1>
+              words={headlineWords}
+              delay={0.45}
+            />
 
             <p className="hero-desc">
               I engineer full-stack platforms for healthcare, fintech, and

@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion';
 import { Monitor, Server, Smartphone, ArrowRight } from 'lucide-react';
 import { pageUrl } from '../lib/paths';
+import {
+  distance,
+  fadeIn,
+  fadeUp,
+  spring,
+  staggerLoose,
+  viewportOnce,
+} from '../lib/motion';
 import './WhatIDo.css';
 
 const services = [
@@ -21,15 +29,10 @@ const services = [
   },
 ];
 
-const gridContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-
-const gridItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
+const gridContainer = staggerLoose();
+const gridItem = fadeUp(0, distance.lg);
+const label = fadeUp();
+const link = fadeIn(0.3);
 
 export default function WhatIDo({ onNavigate }) {
   return (
@@ -38,10 +41,10 @@ export default function WhatIDo({ onNavigate }) {
         <div className="whatido-header">
           <motion.p
             className="section-label"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            variants={label}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
           >
             what i do
           </motion.p>
@@ -49,10 +52,10 @@ export default function WhatIDo({ onNavigate }) {
             href={pageUrl('about')}
             className="whatido-link"
             onClick={(event) => onNavigate?.('about', event)}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            variants={link}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
           >
             more about me <ArrowRight size={12} />
           </motion.a>
@@ -63,14 +66,14 @@ export default function WhatIDo({ onNavigate }) {
           variants={gridContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={viewportOnce}
         >
           {services.map((s, i) => (
             <motion.div
               key={i}
               className="whatido-card"
               variants={gridItem}
-              whileHover={{ y: -6, transition: { type: 'spring', stiffness: 350, damping: 24 } }}
+              whileHover={{ y: -6, transition: spring.lift }}
             >
               <div className="whatido-icon">{s.icon}</div>
               <div className="whatido-title">{s.title}</div>

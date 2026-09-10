@@ -1,0 +1,25 @@
+/* ── Character-level mask reveal ── */
+
+.split-word {
+  display: inline-block;
+  margin-right: 0.22em;
+  white-space: nowrap;
+}
+
+/*
+ * The mask clips the character as it slides up. The padding/margin pair gives
+ * descenders (g, y, p, comma) room to render — without it the mask shears
+ * their tails off once the animation settles.
+ */
+.split-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+.split-char {
+  display: inline-block;
+  will-change: transform;
+}

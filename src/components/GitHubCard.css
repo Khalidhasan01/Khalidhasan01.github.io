@@ -184,3 +184,33 @@
 .gh-badge:hover {
   transform: scale(1.2);
 }
+
+/* ── Narrow screens ──
+   The card's intrinsic minimum width (~395px, driven by the three stat
+   columns and their uppercase labels) was wider than a 375px viewport.
+   Because the card sits in the hero's grid, that minimum propagated up and
+   pushed the whole hero — headline and body copy included — off both edges.
+   Let the columns shrink and tighten the labels so the card can fit. */
+.gh-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 480px) {
+  .gh-card {
+    padding: 22px 16px;
+  }
+
+  .gh-stat {
+    padding: 10px 8px;
+  }
+
+  .gh-stat-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .gh-badges-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

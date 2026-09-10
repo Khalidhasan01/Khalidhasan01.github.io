@@ -13,58 +13,29 @@ import {
 } from 'lucide-react';
 import TiltCard from './TiltCard';
 import Magnetic from './Magnetic';
+import SplitText from './SplitText';
 import { projects, projectFilters } from '../lib/projects';
+import {
+  distance,
+  fadeUp,
+  slideX,
+  stagger,
+  staggerBase,
+  viewportEarly,
+} from '../lib/motion';
+import { useSpotlight } from '../lib/useSpotlight';
 import './Projects.css';
 import './ProjectsPage.css';
 
-const reveal = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
-};
+const reveal = fadeUp();
+const columnContainer = stagger(0.1);
+const columnItem = fadeUp();
+const gridContainer = staggerBase();
+const gridItem = fadeUp(0, distance.lg);
+const tableContainer = stagger(0.07);
+const tableItem = slideX(distance.sm);
 
-const columnContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-
-const columnItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const wordContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
-};
-
-const wordItem = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
-
-const gridContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const gridItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const tableContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07 } },
-};
-
-const tableItem = {
-  hidden: { opacity: 0, x: 16 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
-
-const viewportOnce = { once: true, amount: 0.15 };
-
-const headlineWords = ['Things', 'I’ve', 'built', { text: '.', accent: true }];
+const headlineWords = ['Things', 'I’ve', 'built', { text: '.', accent: true, attached: true }];
 
 const seliseCapabilities = [
   {
@@ -138,21 +109,8 @@ export default function ProjectsPage({ onNavigate }) {
     );
   }, []);
 
-  const handleSpotlight = (e) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    el.style.setProperty('--my', `${e.clientY - r.top}px`);
-  };
-
-  const handleWisSpotlight = (e) => {
-    const items = e.currentTarget.querySelectorAll('.wis-item');
-    items.forEach((item) => {
-      const r = item.getBoundingClientRect();
-      item.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      item.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  };
+  const handleSpotlight = useSpotlight();
+  const handleWisSpotlight = useSpotlight('.wis-item');
 
   return (
     <main className="projects-page">
@@ -166,18 +124,7 @@ export default function ProjectsPage({ onNavigate }) {
           >
             &gt;_ PROJECTS
           </motion.p>
-          <motion.h1 variants={wordContainer} initial="hidden" animate="show">
-            {headlineWords.map((w, i) => (
-              <motion.span
-                key={i}
-                variants={wordItem}
-                className={typeof w === 'object' && w.accent ? 'accent' : undefined}
-                style={{ display: 'inline-block', marginRight: '0.22em' }}
-              >
-                {typeof w === 'object' ? w.text : w}
-              </motion.span>
-            ))}
-          </motion.h1>
+          <SplitText as="h1" words={headlineWords} delay={0.1} />
           <motion.p
             className="projects-lede"
             initial={{ opacity: 0, y: 18 }}
@@ -199,7 +146,7 @@ export default function ProjectsPage({ onNavigate }) {
             variants={reveal}
             initial="hidden"
             whileInView="show"
-            viewport={viewportOnce}
+            viewport={viewportEarly}
           >
             {projectFilters.map((f) => (
               <motion.button
@@ -337,7 +284,7 @@ export default function ProjectsPage({ onNavigate }) {
             variants={columnContainer}
             initial="hidden"
             whileInView="show"
-            viewport={viewportOnce}
+            viewport={viewportEarly}
           >
             <motion.div variants={columnItem}>
               <p className="section-label">What I build at SELISE</p>

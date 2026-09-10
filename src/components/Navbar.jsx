@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { pageUrl } from '../lib/paths';
+import { lockScroll, unlockScroll } from '../lib/smoothScroll';
 import './Navbar.css';
 
 export default function Navbar({ theme, onToggleTheme, page, onNavigate }) {
@@ -42,12 +43,9 @@ export default function Navbar({ theme, onToggleTheme, page, onNavigate }) {
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
-    const { overflow } = document.body.style;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = overflow;
-    };
+    if (!open) return undefined;
+    lockScroll();
+    return unlockScroll;
   }, [open]);
 
   const links = [

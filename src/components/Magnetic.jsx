@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { spring } from '../lib/motion';
 import './Magnetic.css';
 
 export default function Magnetic({ children }) {
@@ -21,7 +22,7 @@ export default function Magnetic({ children }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setPos({ x: 0, y: 0 })}
       animate={{ x: pos.x, y: pos.y }}
-      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={spring.magnetic}
     >
       {children}
     </motion.div>
