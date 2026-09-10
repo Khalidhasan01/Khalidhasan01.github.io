@@ -28,7 +28,19 @@
   z-index: 0;
 }
 
-.app > *:not(.navbar-shell):not(.navbar-spacer):not(.scroll-progress) {
+/*
+ * Page content stacks above the fixed background layers; everything else
+ * under .app is chrome that positions itself (navbar, scroll bar, page
+ * sweep, backdrop).
+ *
+ * This used to be `.app > *` with a growing :not() chain of chrome classes.
+ * That was both fragile — each new fixed layer silently got position:relative
+ * until someone remembered to add it — and stale, since the page sections now
+ * live inside PageTransition rather than directly under .app. Naming the two
+ * elements that actually need it is simpler and can't rot the same way.
+ */
+.app > .page-layer,
+.app > .footer {
   position: relative;
   z-index: 1;
 }

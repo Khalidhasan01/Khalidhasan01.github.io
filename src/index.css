@@ -62,6 +62,19 @@
 
   /* ── Font ── */
   --font: 'JetBrains Mono', monospace;
+
+  /*
+   * Section bands, veiled.
+   *
+   * The alternating sections sit directly over the shader backdrop. Fully
+   * opaque, they black it out for roughly half the page — the atmosphere
+   * appears in stripes and the cursor glow simply vanishes over them. A
+   * little transparency keeps the tonal step between sections while letting
+   * the backdrop read through. These resolve per theme, because the vars
+   * they mix are themselves redefined per theme.
+   */
+  --color-bg-alt-veil: color-mix(in srgb, var(--color-bg-alt) 88%, transparent);
+  --color-bg-tint-veil: color-mix(in srgb, var(--color-bg-tint) 88%, transparent);
 }
 
 :root[data-theme='dark'] {

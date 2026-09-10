@@ -252,7 +252,7 @@
   position: relative;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  background: var(--color-bg-tint);
+  background: var(--color-bg-tint-veil);
   padding: 16px;
   overflow: hidden;
 }
@@ -440,7 +440,7 @@
 .wis-section {
   padding: 88px 0;
   border-top: 1px solid var(--color-border);
-  background: var(--color-bg-alt);
+  background: var(--color-bg-alt-veil);
   margin-top: 56px;
 }
 

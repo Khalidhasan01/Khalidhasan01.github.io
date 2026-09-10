@@ -30,6 +30,7 @@ export default function PageTransition({ children }) {
 
   return (
     <motion.div
+      className="page-layer"
       variants={reduce ? instant : page}
       initial="initial"
       animate="animate"

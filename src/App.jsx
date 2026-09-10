@@ -8,7 +8,7 @@ import WhatIDo from './components/WhatIDo';
 import Projects from './components/Projects';
 import TechStack from './components/TechStack';
 import Footer from './components/Footer';
-import Blobs from './components/Blobs';
+import Backdrop from './components/Backdrop';
 import SmoothScroll from './components/SmoothScroll';
 import PageTransition, { PageSweep } from './components/PageTransition';
 import { pageFromPath, pageUrl, hashUrl, PAGES } from './lib/paths';
@@ -159,7 +159,7 @@ function App() {
       <SmoothScroll />
       <motion.div className="scroll-progress" style={{ scaleX: scrollProgress }} />
       <PageSweep key={`sweep-${page}`} />
-      <Blobs />
+      <Backdrop />
       <Navbar
         theme={theme}
         onToggleTheme={toggleTheme}
