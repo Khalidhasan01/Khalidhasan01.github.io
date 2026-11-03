@@ -10,6 +10,7 @@ import {
   Code2,
   Flame,
   Cpu,
+  Feather,
 } from 'lucide-react';
 
 export const projectFilters = ['all', 'full-stack', 'frontend', 'mobile', 'personal'];
@@ -97,6 +98,19 @@ export const projects = [
     tags: ['Angular 19', '.NET 8', 'MongoDB', 'SignalR', 'Docker', 'Tailwind'],
     scope: 'work',
     nda: true,
+  },
+  {
+    icon: Feather,
+    name: 'Verso',
+    type: 'full-stack',
+    typeLabel: 'full-stack',
+    categories: ['full-stack', 'personal'],
+    desc: 'A blogging and publishing platform I designed and am building solo: Tiptap rich-text editor with autosave and revisions, an editorial review flow, author profiles, real-time messaging, an admin moderation suite, and custom themes. A modular monolith with framework-free business logic and module boundaries checked in CI.',
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'PostgreSQL', 'Drizzle ORM', 'Better Auth', 'Ably'],
+    scope: 'personal',
+    status: 'live — backend landing phase by phase',
+    home: true,
+    links: [{ label: 'live', href: 'https://verso-coral-phi.vercel.app' }],
   },
   {
     icon: HeartPulse,

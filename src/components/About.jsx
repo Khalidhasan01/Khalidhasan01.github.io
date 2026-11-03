@@ -28,11 +28,11 @@ const timeline = [
 
 const tools = [
   ['Languages', 4, 'Kotlin, TypeScript, JavaScript, Java'],
-  ['Frontend', 5, 'React, Angular, TanStack Router/Query, NgRx, Redux, Tailwind CSS'],
-  ['UI libraries', 3, 'Angular Material, Joy UI'],
+  ['Frontend', 5, 'React, Next.js, Angular, TanStack Router/Query, NgRx, Redux, Tailwind CSS'],
+  ['UI libraries', 3, 'Angular Material, Joy UI, Radix UI, Tiptap'],
   ['Backend', 4, 'Spring Boot, JPA/Hibernate, jOOQ, Liquibase, Gradle'],
-  ['Databases & auth', 3, 'PostgreSQL, Neon, Azure AD / JWT'],
-  ['DevOps & tools', 3, 'Docker, Vercel, Render, Git, Cursor, Obsidian, Ollama'],
+  ['Databases & auth', 3, 'PostgreSQL, Neon, Drizzle ORM, Redis, Better Auth, Azure AD / JWT'],
+  ['DevOps & tools', 3, 'Docker, Turborepo, pnpm, Vercel, Render, Git, Cursor, Obsidian, Ollama'],
 ];
 
 const principles = [
@@ -61,11 +61,12 @@ const principles = [
 const summary = [
   'I’m a Software Engineer at SELISE Digital Platforms, working from Dhaka across Kotlin/Spring Boot backends and React/TypeScript frontends. Most recently, I’ve worked on LZTBCare, a clinical case-management system for TB patients—building lab-result screening tables, contact tracing, and medication-management logic.',
   'I’ve also built CRM modules in Angular with NgRx signals and Angular Material, then moved into React mid-project—learning hooks, TanStack Router, and component composition inside a live production codebase.',
-  'Outside work, I’m building FitMonitor solo: frontend, Kotlin/Spring Boot backend, auth, data model, and deployment decisions. I also explore .NET Core and run local AI tools to understand what is useful beyond an API call.',
+  'Outside work, I build products solo, end to end. Verso, my blogging and publishing platform, is live: a Next.js 16 modular monolith with a rich-text editor, editorial review, real-time messaging, and an admin moderation suite. I’m also building FitMonitor on Kotlin/Spring Boot, exploring .NET Core, and running local AI tools to understand what is useful beyond an API call.',
 ];
 
 const highlights = [
   'Full-stack ownership across LZTBCare—from Kotlin/Spring Boot backend to React frontend features.',
+  'Designed, built, and shipped Verso solo: a modular monolith with module boundaries checked in CI, live on Vercel.',
   'Solo end-to-end build of FitMonitor: architecture, backend, database, and deployment planning.',
   'Transitioned from Angular to React mid-project and became productive in a live codebase.',
 ];
@@ -169,7 +170,7 @@ export default function About() {
           </motion.div>
           <motion.div className="about-direction" variants={directionContainer}>
             <motion.p variants={directionItem}>
-              Building FitMonitor solo has made backend architecture decisions feel just as important as the UI. I’m drawn to the seam between frontend and backend, where product ideas become dependable systems.
+              Building Verso and FitMonitor solo has made backend architecture decisions feel just as important as the UI. I’m drawn to the seam between frontend and backend, where product ideas become dependable systems.
             </motion.p>
             <motion.p variants={directionItem}>
               I’m also spending time with local AI tooling out of curiosity: running models on my own hardware and separating what is genuinely useful from what is merely new.

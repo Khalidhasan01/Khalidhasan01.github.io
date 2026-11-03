@@ -82,7 +82,7 @@
 .about-section h2 { font-size: clamp(1.35rem, 2.5vw, 2rem); }
 
 .about-timeline { list-style: none; border-top: 1px solid var(--color-border); }
-.about-timeline li { display: grid; grid-template-columns: minmax(128px, 0.75fr) 1.25fr; gap: 20px; padding: 19px 0; border-bottom: 1px solid var(--color-border); position: relative; transition: background 0.3s; }
+.about-timeline li { display: grid; grid-template-columns: minmax(128px, 0.75fr) 1.25fr; gap: 20px; padding: 19px 16px 19px 20px; border-bottom: 1px solid var(--color-border); position: relative; transition: background 0.3s; }
 .about-timeline li::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--color-accent), var(--color-accent-link)); transform: scaleY(0); transform-origin: top; transition: transform 0.3s; }
 .about-timeline li:hover { background: rgba(var(--color-accent-rgb), 0.035); }
 .about-timeline li:hover::before { transform: scaleY(1); }

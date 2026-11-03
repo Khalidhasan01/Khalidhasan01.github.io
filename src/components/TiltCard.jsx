@@ -9,7 +9,12 @@ export default function TiltCard({ children, ...props }) {
   const rotateY = useSpring(useMotionValue(0), spring.tilt);
 
   const handleMouseMove = (e) => {
-    const el = ref.current;
+    // currentTarget rather than ref.current: the ref is cleared as soon as a
+    // page starts unmounting, but the card stays on screen through its exit
+    // animation and keeps receiving mousemove — hovering a card while
+    // navigating away used to throw on every frame.
+    const el = e.currentTarget ?? ref.current;
+    if (!el) return;
     const r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;

@@ -112,6 +112,15 @@ export default function Projects({ activeTech = null, onSelectTech, onNavigate }
                 </div>
                 <div className="project-name">{p.name}</div>
                 <div className="project-desc">{p.desc}</div>
+                {p.links && (
+                  <div className="project-links">
+                    {p.links.map((l) => (
+                      <a key={l.label} href={l.href} target="_blank" rel="noreferrer">
+                        {l.label} <ArrowUpRight size={13} />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </TiltCard>
             );
           })}

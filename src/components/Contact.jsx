@@ -55,6 +55,8 @@ export default function Contact() {
         setFlipped(false);
         await new Promise((r) => setTimeout(r, reduce ? 0 : 700));
       }
+      // Flatten the card for capture — see `.is-exporting` in Contact.css.
+      cardRef.current.classList.add('is-exporting');
       const dataUrl = await toPng(cardRef.current, { pixelRatio: 2 });
       const link = document.createElement('a');
       link.download = 'khalid-dev-card.png';
@@ -63,6 +65,7 @@ export default function Contact() {
     } catch {
       /* export failed — ignore */
     } finally {
+      cardRef.current?.classList.remove('is-exporting');
       setDownloading(false);
     }
   };

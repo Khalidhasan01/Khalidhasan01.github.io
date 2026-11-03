@@ -398,28 +398,6 @@
   color: var(--color-green);
 }
 
-.project-links {
-  display: flex;
-  gap: 14px;
-}
-
-.project-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.62rem;
-  font-weight: 600;
-  color: var(--color-accent-link);
-}
-
-.project-links a svg {
-  transition: transform 0.25s;
-}
-
-.project-links a:hover svg {
-  transform: translate(2px, -2px);
-}
-
 .project-tags {
   display: flex;
   flex-wrap: wrap;

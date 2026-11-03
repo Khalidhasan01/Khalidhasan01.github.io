@@ -179,6 +179,28 @@
   box-shadow: 0 18px 44px var(--color-accent-glow);
 }
 
+/*
+ * Export mode, set only while "download card" captures the card.
+ *
+ * html-to-image renders through an SVG foreignObject, which ignores
+ * backface-visibility and preserve-3d. Left alone, both faces paint and the
+ * back one — rotated 180deg — lands mirrored on top of the front. So for the
+ * capture: drop the back face, flatten the 3D, and give the front a solid
+ * ground, since its translucent gradient would otherwise export see-through.
+ */
+.contact-card.is-exporting .contact-back {
+  display: none;
+}
+
+.contact-card.is-exporting .contact-card-inner {
+  transform: none !important;
+}
+
+.contact-card.is-exporting .contact-front {
+  background: var(--color-surface);
+  box-shadow: none;
+}
+
 .contact-back-title {
   font-size: 0.6rem;
   font-weight: 600;

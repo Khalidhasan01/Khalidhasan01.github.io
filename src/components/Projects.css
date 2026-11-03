@@ -379,3 +379,28 @@
     transition: opacity 0.2s ease;
   }
 }
+
+/* Live / source links. Lives here rather than in ProjectsPage.css because
+   that stylesheet is code-split with its page — the home cards render these
+   too, and would come up unstyled on a first visit. */
+.project-links {
+  display: flex;
+  gap: 14px;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--color-accent-link);
+}
+
+.project-links a svg {
+  transition: transform 0.25s;
+}
+
+.project-links a:hover svg {
+  transform: translate(2px, -2px);
+}
