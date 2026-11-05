@@ -27,12 +27,13 @@ const timeline = [
 ];
 
 const tools = [
-  ['Languages', 4, 'Kotlin, TypeScript, JavaScript, Java'],
+  ['Languages', 4, 'Kotlin, TypeScript, JavaScript, Java, Python'],
   ['Frontend', 5, 'React, Next.js, Angular, TanStack Router/Query, NgRx, Redux, Tailwind CSS'],
   ['UI libraries', 3, 'Angular Material, Joy UI, Radix UI, Tiptap'],
-  ['Backend', 4, 'Spring Boot, JPA/Hibernate, jOOQ, Liquibase, Gradle'],
+  ['Backend', 4, 'Spring Boot, FastAPI, JPA/Hibernate, jOOQ, Liquibase, Gradle'],
   ['Databases & auth', 3, 'PostgreSQL, Neon, Drizzle ORM, Redis, Better Auth, Azure AD / JWT'],
   ['DevOps & tools', 3, 'Docker, Turborepo, pnpm, Vercel, Render, Git, Cursor, Obsidian, Ollama'],
+  ['AI engineering', 3, 'LangGraph, LangChain, MCP, agentic RAG with Qdrant, Langfuse, evals, OpenRouter, Ollama'],
 ];
 
 const principles = [

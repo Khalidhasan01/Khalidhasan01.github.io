@@ -43,6 +43,10 @@
   --cat: #d97706;
   --cat-rgb: 217, 119, 6;
 }
+.tech-category[data-cat='ai'] {
+  --cat: #4f46e5;
+  --cat-rgb: 79, 70, 229;
+}
 
 /* ── Per-category accent tints (dark) ── */
 :root[data-theme='dark'] .tech-category[data-cat='languages'] {
@@ -68,6 +72,10 @@
 :root[data-theme='dark'] .tech-category[data-cat='devops'] {
   --cat: #fbbf24;
   --cat-rgb: 251, 191, 36;
+}
+:root[data-theme='dark'] .tech-category[data-cat='ai'] {
+  --cat: #818cf8;
+  --cat-rgb: 129, 140, 248;
 }
 
 /* ── Category panel ── */

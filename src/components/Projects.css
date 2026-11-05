@@ -404,3 +404,19 @@
 .project-links a:hover svg {
   transform: translate(2px, -2px);
 }
+
+/* AI engineering projects: indigo, the same tint as the tech stack's AI group.
+   Kept in this shared sheet so the badge is coloured on the home cards too. */
+.project-type.ai {
+  border-color: rgba(79, 70, 229, 0.4);
+  color: #4f46e5;
+}
+
+:root[data-theme='dark'] .project-type.ai {
+  border-color: rgba(129, 140, 248, 0.4);
+  color: #818cf8;
+}
+
+.project-card.type-ai {
+  --type-rgb: 99, 102, 241;
+}

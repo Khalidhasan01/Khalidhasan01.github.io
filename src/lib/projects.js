@@ -11,6 +11,7 @@ import {
   Flame,
   Cpu,
   Feather,
+  BrainCircuit,
 } from 'lucide-react';
 
 export const projectFilters = ['all', 'full-stack', 'frontend', 'mobile', 'personal'];
@@ -111,6 +112,17 @@ export const projects = [
     status: 'live — backend landing phase by phase',
     home: true,
     links: [{ label: 'live', href: 'https://verso-coral-phi.vercel.app' }],
+  },
+  {
+    icon: BrainCircuit,
+    name: 'UnderCover — AI claims agent',
+    type: 'ai',
+    typeLabel: 'ai engineering',
+    categories: ['full-stack', 'personal'],
+    desc: 'A claims platform for a fictional travel insurer, built as a Forward Deployed Engineer on Ed Donner’s AI FDE course. A LangGraph agent decides each claim the way a human handler would, with durable Postgres checkpoints, a swarm of up to 25 parallel claim agents, agentic RAG over Qdrant via MCP, evals scored against the handlers’ decisions, a self-improving instruction loop, and a prompt-injection guard. Payouts over $1,000 pause for a handler’s sign-off, enforced in the backend rather than the prompt. Deployed to AWS on Bedrock AgentCore.',
+    tags: ['Python', 'FastAPI', 'LangGraph', 'MCP', 'Qdrant', 'Langfuse', 'Supabase', 'React 19', 'AWS'],
+    scope: 'personal',
+    home: true,
   },
   {
     icon: HeartPulse,

@@ -6,6 +6,7 @@ import {
   Database,
   TerminalSquare,
   Plug,
+  BrainCircuit,
 } from 'lucide-react';
 import {
   fadeUp,
@@ -25,7 +26,7 @@ const categories = [
     id: 'languages',
     label: 'languages',
     icon: <Code2 size={13} />,
-    items: ['TypeScript', 'JavaScript', 'C# 12', 'Kotlin', 'HTML/CSS', 'SCSS'],
+    items: ['TypeScript', 'JavaScript', 'Python', 'C# 12', 'Kotlin', 'HTML/CSS', 'SCSS'],
   },
   {
     id: 'frontend',
@@ -59,6 +60,7 @@ const categories = [
       'Hangfire',
       'FluentValidation',
       'CQRS',
+      'FastAPI',
       'Hono',
       'Drizzle ORM',
       'Better Auth',
@@ -69,7 +71,7 @@ const categories = [
     id: 'databases',
     label: 'databases & messaging',
     icon: <Database size={13} />,
-    items: ['MongoDB', 'PostgreSQL', 'CouchBase Lite', 'Upstash Redis', 'RabbitMQ', 'SignalR', 'Ably'],
+    items: ['MongoDB', 'PostgreSQL', 'Supabase', 'CouchBase Lite', 'Upstash Redis', 'RabbitMQ', 'SignalR', 'Ably'],
   },
   {
     id: 'devops',
@@ -85,9 +87,27 @@ const categories = [
       'Vite',
       'Vitest',
       'Vercel',
+      'AWS',
       'SonarQube',
       'Swagger',
       'Orval',
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'ai engineering',
+    icon: <BrainCircuit size={13} />,
+    items: [
+      'LangChain',
+      'LangGraph',
+      'MCP',
+      'Agentic RAG',
+      'Qdrant',
+      'Langfuse',
+      'Evals',
+      'Claude Agent SDK',
+      'OpenRouter',
+      'Ollama',
     ],
   },
   {
